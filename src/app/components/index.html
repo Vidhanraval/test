@@ -2,56 +2,44 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Airbnb Style UI</title>
-  <link rel="stylesheet" href="style.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Airbnb UI</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="hero">
-    <header>
-      <div class="logo">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/69/Airbnb_Logo_Bélo.svg" alt="Airbnb Logo" />
-      </div>
+  <header>
+    <div class="logo">
+      <img src="Logo.png" alt="Airbnb Logo">
+    </div>
+    
+    <div class="navbar">
+      <div class="logo">airbnb</div>
       <nav>
         <a href="#">Places to stay</a>
         <a href="#">Experiences</a>
         <a href="#">Online Experiences</a>
       </nav>
-      <div class="actions">
-        <a href="#" class="host-btn">Become a host</a>
-        <img src="https://img.icons8.com/ios-filled/20/ffffff/menu.png" alt="menu"/>
-        <div class="profile-icon">
-          <img src="https://img.icons8.com/ios-filled/20/ffffff/user-male-circle.png" alt="user"/>
-        </div>
+      <div class="right-menu">
+        <button class="host-btn">Become a host</button>
+        <div class="menu-icon">☰</div>
+        <div class="profile-icon">👤</div>
       </div>
-    </header>
+    </div>
 
     <div class="search-bar">
-      <div class="search-item">
-        <label>Location</label>
-        <input type="text" placeholder="Where are you going?" />
-      </div>
-      <div class="search-item">
-        <label>Check in</label>
-        <input type="text" placeholder="Add dates" />
-      </div>
-      <div class="search-item">
-        <label>Check out</label>
-        <input type="text" placeholder="Add dates" />
-      </div>
-      <div class="search-item">
-        <label>Guests</label>
-        <input type="text" placeholder="Add guests" />
-      </div>
-      <div class="search-button">
-        <button><img src="https://img.icons8.com/ios-filled/20/ffffff/search--v1.png" alt="search"/></button>
-      </div>
+      <input type="text" placeholder="Where are you going?" />
+      <input type="text" placeholder="Add dates" />
+      <input type="text" placeholder="Add dates" />
+      <input type="text" placeholder="Add guests" />
+      <button class="search-btn">🔍</button>
     </div>
+  </header>
 
-    <div class="flexible">
+  <section class="hero">
+    <div class="hero-text">
       <h2>Not sure where to go? Perfect.</h2>
-      <button class="flexible-btn">I'm flexible</button>
+      <button class="flexible-btn">I’m flexible</button>
     </div>
-  </div>
+  </section>
 </body>
 </html>
