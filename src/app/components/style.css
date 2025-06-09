@@ -1,140 +1,139 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f9f9f9;
-    color: #333;
-  }
-  
-  header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 30px 60px;
-    background-color: white;
-  }
-  
-  .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-transform: lowercase;
-  }
-  
-  nav a {
-    margin-left: 30px;
-    text-decoration: none;
-    color: #666;
-    font-size: 14px;
-    text-transform: lowercase;
-    transition: color 0.3s ease;
-  }
-  
-  nav a:hover {
-    color: black;
-  }
-  
-  .hero {
-    display: flex;
-    height: 500px;
-    background-color: white;
-  }
-  
-  .hero-image img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-  }
-  
-  .hero-image {
-    flex: 1;
-  }
-  
-  .hero-text {
-    flex: 1;
-    padding: 60px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: #fff;
-  }
-  
-  .hero-text h1 {
-    font-size: 32px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  .hero-text p {
-    font-size: 14px;
-    color: #555;
-    margin-bottom: 30px;
-    line-height: 1.6;
-  }
-  
-  .shop-btn {
-    text-decoration: none;
-    border-bottom: 1px solid black;
-    font-weight: bold;
-    font-size: 14px;
-    color: black;
-    width: fit-content;
-    padding-bottom: 3px;
-  }
-  
-  .slider-controls {
-    display: flex;
-    justify-content: flex-end;
-    padding: 10px 60px;
-    background-color: #fff;
-  }
-  
-  .slider-controls button {
-    border: none;
-    background-color: #000;
-    color: #fff;
-    padding: 10px 20px;
-    margin-left: 10px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  .about {
-    display: flex;
-    padding: 40px 60px;
-    background-color: #f4f4f4;
-  }
-  
-  .about-left img {
-    width: 100%;
-    max-width: 500px;
-    object-fit: cover;
-  }
-  
-  .about-left {
-    flex: 1;
-  }
-  
-  .about-right {
-    flex: 1;
-    padding: 0 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  
-  .about-right h3 {
-    font-size: 18px;
-    margin-bottom: 15px;
-    font-weight: bold;
-  }
-  
-  .about-right p {
-    font-size: 14px;
-    color: #555;
-    line-height: 1.6;
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f9f9f9;
+  color: #333;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 60px;
+  background-color: white;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-transform: lowercase;
+}
+
+nav a {
+  margin-left: 30px;
+  text-decoration: none;
+  color: #666;
+  font-size: 14px;
+  text-transform: lowercase;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: black;
+}
+
+.hero {
+  display: flex;
+  height: 500px;
+  background-color: white;
+}
+
+.hero-image img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.hero-image {
+  flex: 1;
+}
+
+.hero-text {
+  flex: 1;
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #fff;
+}
+
+.hero-text h1 {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.hero-text p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.shop-btn {
+  text-decoration: none;
+  border-bottom: 1px solid black;
+  font-weight: bold;
+  font-size: 14px;
+  color: black;
+  width: fit-content;
+  padding-bottom: 3px;
+}
+
+.slider-controls {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 60px;
+  background-color: #fff;
+}
+
+.slider-controls button {
+  border: none;
+  background-color: #000;
+  color: #fff;
+  padding: 10px 20px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.about {
+  display: flex;
+  padding: 40px 60px;
+  background-color: #f4f4f4;
+}
+
+.about-left img {
+  width: 100%;
+  max-width: 500px;
+  object-fit: cover;
+}
+
+.about-left {
+  flex: 1;
+}
+
+.about-right {
+  flex: 1;
+  padding: 0 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.about-right h3 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.about-right p {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6;
+}
