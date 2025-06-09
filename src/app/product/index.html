@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dessert Shop</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fefaf7;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      gap: 20px;
+    }
+
+    .container {
+      display: flex;
+      width: 100%;
+      gap: 20px;
+    }
+
+    .products {
+      flex: 3;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+      overflow: hidden;
+      transition: 0.3s;
+    }
+
+    .card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+
+    .details {
+      padding: 15px;
+      text-align: center;
+    }
+
+    .details h3 {
+      margin: 10px 0 5px;
+      font-size: 16px;
+    }
+
+    .details p {
+      color: #444;
+      margin: 0 0 10px;
+      font-weight: bold;
+    }
+
+    .details button, .counter button {
+      background: #f54d2e;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .counter {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .counter span {
+      min-width: 24px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .cart {
+      flex: 1;
+      background: white;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      height: fit-content;
+    }
+
+    .cart h2 {
+      margin-top: 0;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .cart-item button {
+      background: transparent;
+      color: red;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .cart-summary {
+      margin-top: 20px;
+      border-top: 1px solid #eee;
+      padding-top: 10px;
+    }
+
+    .cart-summary p {
+      margin: 10px 0;
+    }
+
+    #confirmBtn {
+      width: 100%;
+      background: #f54d2e;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+    }
+
+    .carbon {
+      font-size: 13px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Products -->
+    <div class="products">
+      <div class="product-grid" id="productGrid"></div>
+    </div>
+
+    <!-- Cart -->
+    <div class="cart">
+      <h2>Your Cart</h2>
+      <div id="cartItems"></div>
+      <div class="cart-summary">
+        <p>Order Total: <strong id="cartTotal">₹00.00</strong></p>
+        <p class="carbon">🌿 This is a <strong>carbon-neutral</strong> delivery</p>
+        <button id="confirmBtn">Confirm Order</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const products = [
+      { id: 1, name: "Waffle with Berries", price: 250, img: "https://images.pexels.com/photos/3026806/pexels-photo-3026806.jpeg" },
+      { id: 2, name: "Vanilla Bean Crème Brûlée", price: 700, img: "https://images.pexels.com/photos/1639563/pexels-photo-1639563.jpeg" },
+      { id: 3, name: "Macaron Mix of Five", price: 180, img: "https://images.pexels.com/photos/1854651/pexels-photo-1854651.jpeg" },
+      { id: 4, name: "Mango Cheesecake", price: 625, img: "https://images.pexels.com/photos/704569/pexels-photo-704569.jpeg" },
+      { id: 5, name: "Pistachio Baklava", price: 400, img: "https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg" },
+      { id: 6, name: "Lemon Meringue Pie", price: 150, img: "https://images.pexels.com/photos/1552636/pexels-photo-1552636.jpeg" },
+      { id: 7, name: "Strawberry Shortcake", price: 160, img: "https://images.pexels.com/photos/1030986/pexels-photo-1030986.jpeg" },
+      { id: 8, name: "Chocolate Brownie", price: 315, img: "https://images.pexels.com/photos/4109995/pexels-photo-4109995.jpeg" },
+      { id: 9, name: "Vanilla Panna Cotta", price: 165, img: "https://images.pexels.com/photos/140831/pexels-photo-140831.jpeg" },
+      { id: 10, name: "Cheesecake with Berries", price: 675, img: "https://images.pexels.com/photos/3026810/pexels-photo-3026810.jpeg" },
+      { id: 11, name: "Chocolate Lava Cake", price: 725, img: "https://images.pexels.com/photos/4109992/pexels-photo-4109992.jpeg" },
+      { id: 12, name: "Fruit Tart", price: 575, img: "https://images.pexels.com/photos/1108140/pexels-photo-1108140.jpeg" }
+    ];
+
+    const cart = {};
+
+    function renderProducts() {
+      const grid = document.getElementById("productGrid");
+      grid.innerHTML = "";
+      products.forEach(product => {
+        const count = cart[product.id]?.quantity || 0;
+        grid.innerHTML += `
+          <div class="card">
+            <img src="${product.img}" alt="${product.name}">
+            <div class="details">
+              <h3>${product.name}</h3>
+              <p>₹${product.price.toFixed(2)}</p>
+
+              ${
+                count > 0
+                  ? `<div class="counter">
+                       <button onclick="updateCart(${product.id}, -1)">−</button>
+                       <span>${count}</span>
+                       <button onclick="updateCart(${product.id}, 1)">+</button>
+                     </div>`
+                  : `<button onclick="addToCart(${product.id})">Add to Cart</button>`
+              }
+            </div>
+          </div>`;
+      });
+    }
+
+    function addToCart(id) {
+      if (!cart[id]) {
+        const product = products.find(p => p.id === id);
+        cart[id] = { ...product, quantity: 1 };
+      }
+      renderProducts();
+      renderCart();
+    }
+
+    function updateCart(id, change) {
+      if (cart[id]) {
+        cart[id].quantity += change;
+        if (cart[id].quantity <= 0) {
+          delete cart[id];
+        }
+      }
+      renderProducts();
+      renderCart();
+    }
+
+    function renderCart() {
+      const cartItems = document.getElementById("cartItems");
+      const cartTotal = document.getElementById("cartTotal");
+      cartItems.innerHTML = "";
+      let total = 0;
+
+      Object.values(cart).forEach(item => {
+        const subtotal = item.price * item.quantity;
+        total += subtotal;
+        cartItems.innerHTML += `
+          <div class="cart-item">
+            <span>{item.name} (${item.quantity})</span>
+            <span>₹${subtotal.toFixed(2)} <button onclick="removeItem(${item.id})">×</button></span>
+          </div>`;
+      });
+
+         cartTotal.innerText = `₹${total.toFixed(2)}`;
+    }
+
+    function removeItem(id) {
+      delete cart[id];
+      renderProducts();
+      renderCart();
+    }
+
+    renderProducts();
+  </script>
+</body>
+</html>
