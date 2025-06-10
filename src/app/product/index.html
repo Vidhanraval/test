@@ -1,153 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dessert Shop</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #fefaf7;
-      margin: 0;
-      padding: 20px;
-      display: flex;
-      gap: 20px;
-    }
-
-    .container {
-      display: flex;
-      width: 100%;
-      gap: 20px;
-    }
-
-    .products {
-      flex: 3;
-    }
-
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 20px;
-    }
-
-    .card {
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.08);
-      overflow: hidden;
-      transition: 0.3s;
-    }
-
-    .card img {
-      width: 100%;
-      height: 160px;
-      object-fit: cover;
-    }
-
-    .details {
-      padding: 15px;
-      text-align: center;
-    }
-
-    .details h3 {
-      margin: 10px 0 5px;
-      font-size: 16px;
-    }
-
-    .details p {
-      color: #444;
-      margin: 0 0 10px;
-      font-weight: bold;
-    }
-
-    .details button, .counter button {
-      background: #f54d2e;
-      color: white;
-      border: none;
-      border-radius: 20px;
-      padding: 6px 12px;
-      cursor: pointer;
-      font-size: 14px;
-    }
-
-    .counter {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .counter span {
-      min-width: 24px;
-      text-align: center;
-      font-weight: bold;
-    }
-
-    .cart {
-      flex: 1;
-      background: white;
-      padding: 20px;
-      border-radius: 16px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      height: fit-content;
-    }
-
-    .cart h2 {
-      margin-top: 0;
-    }
-
-    .cart-item {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 10px;
-    }
-
-    .cart-item button {
-      background: transparent;
-      color: red;
-      border: none;
-      cursor: pointer;
-      font-size: 16px;
-    }
-
-    .cart-summary {
-      margin-top: 20px;
-      border-top: 1px solid #eee;
-      padding-top: 10px;
-    }
-
-    .cart-summary p {
-      margin: 10px 0;
-    }
-
-    #confirmBtn {
-      width: 100%;
-      background: #f54d2e;
-      padding: 10px;
-      font-size: 16px;
-      border-radius: 8px;
-    }
-
-    .carbon {
-      font-size: 13px;
-      color: #555;
-    }
-  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <div class="container">
-    <!-- Products -->
-    <div class="products">
-      <div class="product-grid" id="productGrid"></div>
+<body class="bg-orange-50 font-sans p-6">
+  <div class="flex flex-col lg:flex-row gap-6">
+    <!-- Products Section -->
+    <div class="flex-1">
+      <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"></div>
     </div>
 
-    <!-- Cart -->
-    <div class="cart">
-      <h2>Your Cart</h2>
-      <div id="cartItems"></div>
-      <div class="cart-summary">
-        <p>Order Total: <strong id="cartTotal">₹00.00</strong></p>
-        <p class="carbon">🌿 This is a <strong>carb nk on-neutral</strong> delivery</p>
-        <button id="confirmBtn">Confirm Order</button>
       </div>
     </div>
   </div>
@@ -176,20 +41,19 @@
       products.forEach(product => {
         const count = cart[product.id]?.quantity || 0;
         grid.innerHTML += `
-          <div class="card">
-            <img src="${product.img}" alt="${product.name}">
-            <div class="details">
-              <h3>${product.name}</h3>
-              <p>₹${product.price.toFixed(2)}</p>
-
+          <div class="bg-white rounded-2xl shadow-md overflow-hidden">
+            <img src="${product.img}" alt="${product.name}" class="w-full h-40 object-cover">
+            <div class="p-4 text-center">
+              <h3 class="text-lg font-semibold">${product.name}</h3>
+              <p class="text-orange-600 font-bold mt-1">₹${product.price.toFixed(2)}</p>
               ${
                 count > 0
-                  ? `<div class="counter">
-                       <button onclick="updateCart(${product.id}, -1)">−</button>
-                       <span>${count}</span>
-                       <button onclick="updateCart(${product.id}, 1)">+</button>
+                  ? `<div class="flex justify-center items-center gap-4 mt-3">
+                       <button onclick="updateCart(${product.id}, -1)" class="bg-orange-500 text-white rounded-full px-3 py-1">−</button>
+                       <span class="font-semibold">${count}</span>
+                       <button onclick="updateCart(${product.id}, 1)" class="bg-orange-500 text-white rounded-full px-3 py-1">+</button>
                      </div>`
-                  : `<button onclick="addToCart(${product.id})">Add to Cart</button>`
+                  : `<button onclick="addToCart(${product.id})" class="mt-3 bg-orange-500 text-white px-4 py-2 rounded-full hover:bg-orange-600 transition">Add to Cart</button>`
               }
             </div>
           </div>`;
@@ -226,13 +90,13 @@
         const subtotal = item.price * item.quantity;
         total += subtotal;
         cartItems.innerHTML += `
-          <div class="cart-item">
-            <span>{item.name} (${item.quantity})</span>
-            <span>₹${subtotal.toFixed(2)} <button onclick="removeItem(${item.id})">×</button></span>
+          <div class="flex justify-between">
+            <span>${item.name} (${item.quantity})</span>
+            <span>₹${subtotal.toFixed(2)} <button onclick="removeItem(${item.id})" class="text-red-500">×</button></span>
           </div>`;
       });
 
-         cartTotal.innerText = `₹${total.toFixed(2)}`;
+      cartTotal.innerText = `₹${total.toFixed(2)}`;
     }
 
     function removeItem(id) {
